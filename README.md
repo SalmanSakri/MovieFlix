@@ -1,5 +1,5 @@
-- Backend URL:https://codesandbox.io/p/github/SalmanSakri/MovieFlix/main?import=true
-- Live Demo Url:https://movieflix-nimap.netlify.app
+- Codesandbox URL:https://codesandbox.io/p/github/SalmanSakri/MovieFlix/main?import=true
+- Live Demo URL:https://movieflix-nimap.netlify.app
 
 ## 🚀 Getting Started
 
