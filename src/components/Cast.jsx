@@ -1,13 +1,35 @@
+import { useState } from "react";
 import LoadingSpinner from "./LoadingSpinner"
 import { API_CONFIG } from "../utils/constants"
 import useFetch from '../hook/fetchApi'
+import Pagination from "../components/Pagination"
 import { useParams } from 'react-router-dom'
 
 const Cast = () => {
-    const { id } = useParams(); // Fixed: Added parentheses
+    const { id } = useParams();
+    const [currentPage, setCurrentPage] = useState(1);
+    const castPerPage = 6;
     const url = `${API_CONFIG.BASE_URL}/movie/${id}/credits?api_key=${API_CONFIG.API_KEY}&language=en-US`;
 
     const { data, error, loading } = useFetch(url);
+
+    const cast = data?.cast || [];
+
+    // Calculate total pages
+    const totalPages = Math.ceil(cast.length / castPerPage);
+
+    // Slice cast for current page
+    const getCurrentCast = () => {
+        const startIndex = (currentPage - 1) * castPerPage;
+        return cast.slice(startIndex, startIndex + castPerPage);
+    };
+
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
+        window.scrollTo({ behavior: 'smooth' });
+    };
+
+
 
     // Handle loading state
     if (loading) {
@@ -40,7 +62,7 @@ const Cast = () => {
         <>
             {/* Cast Grid - Responsive grid for cast members */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                {data.cast.slice(0, 12).map((actor) => ( // Show only first 12 cast members
+                {getCurrentCast().map((actor) => ( // Show only first 12 cast members
                     <div key={actor.id} className="">
                         {/* Actor profile image */}
                         <img
@@ -59,6 +81,13 @@ const Cast = () => {
                     </div>
                 ))}
             </div>
+
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+
+            />
         </>
     )
 }
