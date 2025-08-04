@@ -2,7 +2,7 @@ import Popular from "./pages/Popular"
 import TopRated from "./pages/TopRated"
 import Upcoming from "./pages/Upcoming"
 import MovieDetail from "./pages/MovieDetail"
-import SearchResults from "./components/SearchResult"
+import SearchResults from "./pages/SearchResult"
 
 import { Routes, Route } from "react-router-dom"
 import './App.css'

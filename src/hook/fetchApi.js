@@ -8,7 +8,7 @@ const useFetch = (url) => {
     useEffect(() => {
         const fetchData = async () => {
             if (!url) {
-                console.log("Provied URL")
+                // console.log("Provied URL")
             }
             setLoading(true);
             try {
@@ -17,12 +17,12 @@ const useFetch = (url) => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const json = await response.json();
-                console.log(json)
+                // console.log(json)
                 setData(json.results || json);
                 setLoading(false);
             } catch (err) {
                 setError(err.message);
-                console.error("Fetch error:", err);
+                // console.error("Fetch error:", err);
             }
         };
 
